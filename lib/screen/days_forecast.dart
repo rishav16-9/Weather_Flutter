@@ -52,7 +52,7 @@ class _DaysForecastState extends State<DaysForecast> {
                           Text(extractTime(days![index].date)),
                           Image.network(
                               '${'https:'}${days![index].day!.condition?.icon}',
-                              fit: BoxFit.cover),
+                              fit: BoxFit.contain),
                           Text(
                               '${days![index].day!.maxtempC}${" \u2103"}/${days![index].day!.mintempC}${" \u2103"}'),
                         ],
