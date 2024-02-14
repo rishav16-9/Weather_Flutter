@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/model/weather-model.model.dart';
+import 'package:weather/screen/days_forecast.dart';
+import 'package:weather/screen/hourly_forecast.dart';
 import 'package:weather/screen/temperature_ui.dart';
 
 class WeatherList extends StatefulWidget {
@@ -30,6 +32,36 @@ class _WeatherListState extends State<WeatherList> {
                   weatherCurrentData: weatherData,
                 ),
               ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Hourly Forecast',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    HourlyForecast(
+                      hourForecast: weatherData,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      '10 Day Forecast',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    DaysForecast(
+                      dayForecast: weatherData,
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
