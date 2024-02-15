@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/model/weather-model.model.dart';
 import 'package:weather/widgets/main_section.widget.dart';
+import 'package:weather/util/date_time.dart';
 
 class TemperatureSection extends StatefulWidget {
   final WeatherModel? weatherCurrentData;
@@ -27,6 +28,8 @@ class _TemperatureSectionState extends State<TemperatureSection> {
         ),
         margin: const EdgeInsets.all(10),
         child: MainSection(
+          day: extractDayFromDateTime(
+              weatherData?.forecast?.forecastday![0].date),
           condition: weatherData?.current?.condition?.text,
           feelsLike: '${weatherData?.current?.feelslikeC}',
           precip: '${weatherData?.current?.precipIn.toString()}',

@@ -14,6 +14,18 @@ class WeatherApiSDK {
     }
     var url = Uri.https('api.weatherapi.com', '/v1/forecast.json', queryParam);
     final http.Response response = await http.get(url);
-    return response;
+    switch (response.statusCode) {
+      case 200:
+        return response; // Return response if successful
+      case 400:
+        return response;
+      case 401:
+        return response.body;
+      case 404:
+        return response.body;
+      default:
+        return;
+    }
+    // return response;
   }
 }

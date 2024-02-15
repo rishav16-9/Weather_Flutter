@@ -9,6 +9,7 @@ class MainSection extends StatefulWidget {
   final String? precip;
   final String? humidity;
   final String? wind;
+  final String? day;
   const MainSection(
       {super.key,
       this.condition,
@@ -17,7 +18,8 @@ class MainSection extends StatefulWidget {
       this.image,
       this.precip,
       this.temprature,
-      this.wind});
+      this.wind,
+      this.day});
 
   @override
   State<MainSection> createState() => _MainSectionState();
@@ -31,12 +33,12 @@ class _MainSectionState extends State<MainSection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                'Now',
-                style: TextStyle(
+                widget.day ?? '',
+                style: const TextStyle(
                   fontSize: 21,
                 ),
               ),

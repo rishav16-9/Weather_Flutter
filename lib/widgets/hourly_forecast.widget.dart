@@ -21,7 +21,7 @@ class _HourlyForecastWidgetState extends State<HourlyForecastWidget> {
           children: [
             Text(widget.temperature ?? ''),
             Image.network(widget.image ?? '', fit: BoxFit.cover),
-            Text(widget?.time ?? '')
+            Text(widget.time ?? '')
           ],
         ),
       ),

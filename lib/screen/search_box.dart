@@ -17,6 +17,9 @@ class _SearchState extends State<Search> {
   TextEditingController searchController = TextEditingController();
   WeatherModel? weatherModel;
   bool isLoading = false;
+  String? errorMessage;
+  bool isError = false;
+  final GlobalKey<FormState> _searchKey = GlobalKey<FormState>();
   callApi(String place) async {
     if (mounted) {
       setState(() {
@@ -25,17 +28,40 @@ class _SearchState extends State<Search> {
     }
     try {
       var response = await WeatherApiSDK().getWeatherReport(place);
-      Map<String, dynamic> responseBody = json.decode(response.body);
-      var temp = await WeatherModel.fromJson(responseBody);
-      setState(() {
-        weatherModel = temp;
-        isLoading = false;
-      });
+      if (response.statusCode == 200) {
+        Map<String, dynamic> responseBody = json.decode(response.body);
+        var temp = await WeatherModel.fromJson(responseBody);
+        setState(() {
+          weatherModel = temp;
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          Map<String, dynamic> responseBody = json.decode(response.body);
+          isLoading = false;
+          errorMessage = responseBody['error']['message'];
+        });
+      }
     } catch (e) {
       setState(() {
         isLoading = false;
       });
       log(e.toString());
+    }
+  }
+
+  bool validate() {
+    setState(() {
+      try {
+        isError = !_searchKey.currentState!.validate();
+      } catch (e) {
+        log(e.toString());
+      }
+    });
+    if (_searchKey.currentState?.validate() ?? false) {
+      return false;
+    } else {
+      return true;
     }
   }
 
@@ -48,34 +74,52 @@ class _SearchState extends State<Search> {
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             Container(
               margin: const EdgeInsets.all(10),
-              child: TextFormField(
-                controller: searchController,
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  filled: true,
-                  // fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.only(
-                      left: 15, bottom: 15, top: 15, right: 15),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      callApi(searchController.text);
-                      FocusScope.of(context).requestFocus(FocusNode());
-                    },
-                    tooltip: 'search',
-                    icon: const Icon(Icons.search_outlined),
-                  ),
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
+              child: Form(
+                key: _searchKey,
+                child: TextFormField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    filled: true,
+                    // fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.only(
+                        left: 15, bottom: 15, top: 15, right: 15),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        String place = searchController.text;
+                        if (place.isNotEmpty) {
+                          callApi(place);
+                          FocusScope.of(context).requestFocus(FocusNode());
+                        } else {
+                          setState(() {
+                            validate();
+                          });
+                        }
+                      },
+                      tooltip: 'search',
+                      icon: const Icon(Icons.search_outlined),
+                    ),
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
                     ),
                   ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
+                  validator: (value) {
+                    if (value == '') {
+                      errorMessage =
+                          '${'Enter '}${string_constants.placeSearch}';
+                      return '';
+                    }
+                    return null;
+                  },
                 ),
               ),
             ),
@@ -91,8 +135,11 @@ class _SearchState extends State<Search> {
                     : Container(
                         alignment: Alignment.center,
                         margin: const EdgeInsets.all(15),
-                        child: const Text(string_constants.enterCity)))
+                        child: Text(errorMessage != null
+                            ? errorMessage.toString()
+                            : string_constants.enterCity)))
                 : const Center(
+                    heightFactor: 15,
                     child: CircularProgressIndicator(),
                   )
           ]),

@@ -12,3 +12,5 @@ const String uvIndex = "UV Index";
 const String sunriseSunset = "Sunrise & Sunset";
 const String feelsLike = "Feels Like";
 const String precip = "Precip";
+const String pleaseEnter = "Please Enter";
+const String placeSearch = "place to search";

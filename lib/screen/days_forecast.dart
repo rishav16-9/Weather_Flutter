@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:weather/model/weather-model.model.dart';
-import 'package:weather/screen/date_weather_detail.dart';
+import 'package:weather/screen/ten_day_screen/date_weather_detail.dart';
+import 'package:weather/util/date_time.dart';
 import 'package:weather/widgets/days_forecast.widget.dart';
 
 class DaysForecast extends StatefulWidget {
@@ -20,12 +20,6 @@ class _DaysForecastState extends State<DaysForecast> {
     weatherModel = widget.dayForecast;
     days = weatherModel!.forecast!.forecastday;
     super.initState();
-  }
-
-  String extractTime(dateString) {
-    DateTime dateTime = DateTime.parse(dateString);
-    String formattedDayOfWeek = DateFormat.EEEE().format(dateTime);
-    return formattedDayOfWeek;
   }
 
   @override
@@ -50,7 +44,7 @@ class _DaysForecastState extends State<DaysForecast> {
                 );
               },
               child: DaysForecastWidget(
-                  day: extractTime(days![index].date),
+                  day: extractDay(days![index].date),
                   image: '${'https:'}${days![index].day!.condition?.icon}',
                   temperature:
                       '${days![index].day!.maxtempC}${" \u2103"}/${days![index].day!.mintempC}${" \u2103"}'),

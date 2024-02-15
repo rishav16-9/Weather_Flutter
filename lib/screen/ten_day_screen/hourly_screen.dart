@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:weather/model/weather-model.model.dart';
-import 'package:weather/widgets/hourly_forecast.widget.dart';
 import 'package:weather/util/date_time.dart';
+import 'package:weather/widgets/hourly_forecast.widget.dart';
 
-class HourlyForecast extends StatefulWidget {
+class HourlyTenDay extends StatefulWidget {
   final WeatherModel? hourForecast;
-  const HourlyForecast({key, this.hourForecast}) : super(key: key);
+  const HourlyTenDay({super.key, this.hourForecast});
 
   @override
-  State<HourlyForecast> createState() => _HourlyForecastState();
+  State<HourlyTenDay> createState() => _HourlyTenDayState();
 }
 
-class _HourlyForecastState extends State<HourlyForecast> {
+class _HourlyTenDayState extends State<HourlyTenDay> {
   WeatherModel? hourForeCast;
   List<Hour>? hour;
 
   @override
   void initState() {
     hourForeCast = widget.hourForecast;
-    var date = DateTime.now();
-    var day =
-        '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
     hourForeCast!.forecast!.forecastday!.forEach((hourEle) {
-      if (day.toString() == hourEle.date) {
-        hour = hourEle.hour;
-      }
+      hour = hourEle.hour;
     });
     super.initState();
   }
@@ -38,6 +33,7 @@ class _HourlyForecastState extends State<HourlyForecast> {
           color: Colors.white70,
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
+        // color: Colors.white70,
         height: 121,
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
