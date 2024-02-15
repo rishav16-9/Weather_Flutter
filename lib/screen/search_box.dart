@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:weather/api/weather_api.dart';
 import 'package:weather/model/weather-model.model.dart';
 import 'package:weather/screen/weather_ui.dart';
+import 'package:weather/constants/string_constants.dart' as string_constants;
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -83,11 +84,14 @@ class _SearchState extends State<Search> {
                         weatherModel?.current != null &&
                         weatherModel?.forecast != null &&
                         weatherModel?.location != null)
-                    ? WeatherList(weatherData: weatherModel)
+                    ? WeatherList(
+                        weatherData: weatherModel,
+                        screen: 'main',
+                      )
                     : Container(
                         alignment: Alignment.center,
                         margin: const EdgeInsets.all(15),
-                        child: const Text('Enter City')))
+                        child: const Text(string_constants.enterCity)))
                 : const Center(
                     child: CircularProgressIndicator(),
                   )

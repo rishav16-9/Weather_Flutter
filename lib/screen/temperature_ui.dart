@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/model/weather-model.model.dart';
+import 'package:weather/widgets/main_section.widget.dart';
 
 class TemperatureSection extends StatefulWidget {
   final WeatherModel? weatherCurrentData;
@@ -20,88 +21,19 @@ class _TemperatureSectionState extends State<TemperatureSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white70,
-      ),
-      margin: const EdgeInsets.all(10),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'Now',
-                  style: TextStyle(
-                    fontSize: 21,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          '${weatherData?.current?.tempC.toString()}${" \u2103"}',
-                          style: const TextStyle(
-                            fontSize: 36,
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Image.network(
-                            '${'https:'}${weatherData?.current?.condition?.icon}',
-                            fit: BoxFit.cover),
-                      ],
-                    ),
-                    Text(
-                      '${'Feels Like: '}${weatherData?.current?.feelslikeC}${" \u2103"}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      weatherData?.current?.condition?.text ?? '',
-                      style: const TextStyle(
-                        fontSize: 19,
-                      ),
-                    ),
-                    Text(
-                      '${'Precip: '}${weatherData?.current?.precipIn.toString()}${"%"}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${'Humidity: '}${weatherData?.current?.humidity}${"%"}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${'Wind: '}${weatherData?.current?.windKph.toString()}${"km/h"}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ],
+        decoration: const BoxDecoration(
+          color: Colors.white70,
+          borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
-      ),
-    );
+        margin: const EdgeInsets.all(10),
+        child: MainSection(
+          condition: weatherData?.current?.condition?.text,
+          feelsLike: '${weatherData?.current?.feelslikeC}',
+          precip: '${weatherData?.current?.precipIn.toString()}',
+          wind: '${weatherData?.current?.windKph.toString()}',
+          humidity: '${weatherData?.current?.humidity}',
+          temprature: '${weatherData?.current?.tempC.toString()}',
+          image: '${'https:'}${weatherData?.current?.condition?.icon}',
+        ));
   }
 }

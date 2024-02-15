@@ -4,10 +4,12 @@ import 'package:weather/screen/current_condtion.dart';
 import 'package:weather/screen/days_forecast.dart';
 import 'package:weather/screen/hourly_forecast.dart';
 import 'package:weather/screen/temperature_ui.dart';
+import 'package:weather/constants/string_constants.dart' as string_constants;
 
 class WeatherList extends StatefulWidget {
   final WeatherModel? weatherData;
-  const WeatherList({key, this.weatherData}) : super(key: key);
+  final String? screen;
+  const WeatherList({key, this.weatherData, this.screen}) : super(key: key);
 
   @override
   State<WeatherList> createState() => _WeatherListState();
@@ -39,7 +41,7 @@ class _WeatherListState extends State<WeatherList> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Hourly Forecast',
+                      string_constants.hourlyForecast,
                       style:
                           TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     ),
@@ -49,29 +51,30 @@ class _WeatherListState extends State<WeatherList> {
                   ],
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '10-Day Forecast',
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                    ),
-                    DaysForecast(
-                      dayForecast: weatherData,
-                    ),
-                  ],
+              if (widget.screen == 'main')
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        string_constants.tenDayForeCast,
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      ),
+                      DaysForecast(
+                        dayForecast: weatherData,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
               Container(
                 margin: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Current Condition',
+                      string_constants.currentCondition,
                       style:
                           TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     ),

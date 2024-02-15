@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/model/weather-model.model.dart';
 import 'package:weather/widgets/current_condition.widget.dart';
+import 'package:weather/constants/string_constants.dart' as string_constants;
 
 class CurrentCondition extends StatefulWidget {
   final WeatherModel? dayForecast;
@@ -34,39 +35,39 @@ class _CurrentConditionState extends State<CurrentCondition> {
             childAspectRatio: 1.3,
             children: <Widget>[
               CurrentData(
-                title: 'Wind',
+                title: string_constants.wind,
                 mainValue:
                     '${weatherModel?.current?.windKph.toString()}${' Km/h'}',
                 subValue: '${'Dir: '}${weatherModel?.current?.windDir}',
                 image: 'wind',
               ),
               CurrentData(
-                title: 'Humidity',
+                title: string_constants.humidity,
                 mainValue:
                     '${weatherModel?.current?.humidity.toString()}${'%'}',
                 subValue: '',
                 image: 'humidity',
               ),
               CurrentData(
-                title: 'UV Index',
+                title: string_constants.uvIndex,
                 mainValue: weatherModel?.current?.uv.toString(),
                 subValue: '',
                 image: 'uv_index',
               ),
               CurrentData(
-                title: 'Pressure',
+                title: string_constants.pressure,
                 mainValue: weatherModel?.current?.pressureMb.toString(),
                 subValue: 'mBar',
                 image: 'pressure',
               ),
               CurrentData(
-                title: 'Air Quality (PM25)',
+                title: string_constants.aqi,
                 mainValue: weatherModel?.current?.airQuality?.pm25.toString(),
                 subValue: '',
                 image: 'aqi',
               ),
               CurrentData(
-                  title: 'Sunrise & Sunset',
+                  title: string_constants.sunriseSunset,
                   mainValue: '${days![0].astro?.sunrise}',
                   subValue: days![0].astro?.sunset,
                   image: 'sun')

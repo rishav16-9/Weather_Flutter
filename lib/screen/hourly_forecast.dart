@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/model/weather-model.model.dart';
+import 'package:weather/widgets/hourly_forecasr.widget.dart';
 
 class HourlyForecast extends StatefulWidget {
   final WeatherModel? hourForecast;
@@ -36,26 +37,20 @@ class _HourlyForecastState extends State<HourlyForecast> {
     return Padding(
       padding: const EdgeInsets.only(top: 7.0),
       child: Container(
-        color: Colors.white70,
-        // decoration: BoxDecoration(),
+        decoration: const BoxDecoration(
+          color: Colors.white70,
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
+        // color: Colors.white70,
         height: 121,
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: hour?.length,
+            itemCount: hour?.length ?? 0,
             itemBuilder: (BuildContext context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                child: Container(
-                  child: Column(
-                    children: [
-                      Text('${hour![index].tempC}${" \u2103"}'),
-                      Image.network(
-                          '${'https:'}${hour![index].condition?.icon}',
-                          fit: BoxFit.cover),
-                      Text(extractTime(hour![index].time))
-                    ],
-                  ),
-                ),
+              return HourlyForecastWidget(
+                temperature: '${hour![index].tempC}${" \u2103"}',
+                image: '${'https:'}${hour![index].condition?.icon}',
+                time: extractTime(hour![index].time),
               );
             }),
       ),
