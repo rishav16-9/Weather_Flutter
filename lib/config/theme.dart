@@ -10,14 +10,14 @@ ThemeData lightMode = ThemeData(
     onPrimary: Colors.black,
     secondary: Colors.grey,
     onSecondary: Colors.black,
-    background: Colors.yellowAccent.shade100, //white70
-    surface: Colors.yellow.shade400,
+    background: Colors.teal.shade100,
+    surface: Colors.teal.shade200,
     onBackground: Colors.black,
     onError: Colors.red,
     error: Colors.red,
     onSurface: Colors.black,
   ),
-  appBarTheme: const AppBarTheme(color: Color.fromRGBO(255, 213, 79, 1)),
+  appBarTheme: const AppBarTheme(color: Color.fromARGB(255, 97, 183, 174)),
 );
 
 ThemeData darkMode = ThemeData(
