@@ -78,7 +78,6 @@ class _DateConditionState extends State<DateCondition> {
                       weatherModel?.forecast != null &&
                       weatherModel?.location != null)
                   ? TenDay(weatherData: weatherModel,)
-                  // WeatherList(weatherData: weatherModel, screen: '10Day')
                   : Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.all(15),

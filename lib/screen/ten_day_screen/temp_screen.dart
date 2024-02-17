@@ -28,11 +28,7 @@ class _TemperatureSectionForTenState extends State<TemperatureSectionForTen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: const BoxDecoration(
-          color: Colors.white70,
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-        ),
+    return Card(
         margin: const EdgeInsets.all(10),
         child: MainSection(
           day: extractDayFromDateTime(

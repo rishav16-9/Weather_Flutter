@@ -16,14 +16,24 @@ class _DaysForecastWidgetState extends State<DaysForecastWidget> {
     return Container(
       child: Card(
         child: Column(children: [
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(widget.day ?? ''),
-                Image.network(widget.image ?? '', fit: BoxFit.contain),
-                Text(widget.temperature ?? ''),
-              ],
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0, right: 10),
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(widget.day ?? ''),
+                  Row(
+                    children: [
+                      Image.network(widget.image ?? '', fit: BoxFit.contain),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      Text(widget.temperature ?? ''),
+                    ],
+                  )
+                ],
+              ),
             ),
           )
         ]),
