@@ -21,10 +21,10 @@ class _CurrentConditionSelectedDayState
   @override
   void initState() {
     weatherModel = widget.dayForecast;
-    weatherModel!.forecast!.forecastday!.forEach((element) {
+    for (var element in weatherModel!.forecast!.forecastday!) {
       avgDetail = element.day;
       sunDetail = element.astro;
-    });
+    }
     super.initState();
   }
 

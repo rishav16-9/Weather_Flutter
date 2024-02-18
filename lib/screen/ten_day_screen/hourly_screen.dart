@@ -18,9 +18,9 @@ class _HourlyTenDayState extends State<HourlyTenDay> {
   @override
   void initState() {
     hourForeCast = widget.hourForecast;
-    hourForeCast!.forecast!.forecastday!.forEach((hourEle) {
+    for (var hourEle in hourForeCast!.forecast!.forecastday!) {
       hour = hourEle.hour;
-    });
+    }
     super.initState();
   }
 

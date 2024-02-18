@@ -20,9 +20,9 @@ class _TemperatureSectionForTenState extends State<TemperatureSectionForTen> {
   @override
   void initState() {
     weatherData = widget.weatherData;
-    weatherData?.forecast?.forecastday!.forEach((element) {
+    for (var element in weatherData!.forecast!.forecastday!) {
       avgDetail = element.day;
-    });
+    }
     super.initState();
   }
 

@@ -21,11 +21,11 @@ class _HourlyForecastState extends State<HourlyForecast> {
     var date = DateTime.now();
     var day =
         '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-    hourForeCast!.forecast!.forecastday!.forEach((hourEle) {
+    for (var hourEle in hourForeCast!.forecast!.forecastday!) {
       if (day.toString() == hourEle.date) {
         hour = hourEle.hour;
       }
-    });
+    }
     super.initState();
   }
 
