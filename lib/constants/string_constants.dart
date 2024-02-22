@@ -14,3 +14,7 @@ const String feelsLike = "Feels Like";
 const String precip = "Precip";
 const String pleaseEnter = "Please Enter";
 const String placeSearch = "place to search";
+const String setting = "Setting";
+const String toggleTheme = "Toggle Theme";
+const String swichTheme = "Change to dark mode";
+const String swichThemeLight = "Change to light mode";

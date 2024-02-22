@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:weather/config/theme_provider.dart';
 import 'package:weather/screen/search_box.dart';
+import 'package:weather/widgets/common_swich_appbar.dart';
 
 class MyHomePage extends StatefulWidget {
   final String? title;
@@ -17,16 +16,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? ''),
-          actions: [
-            Switch(
-              value:
-                  Provider.of<ThemeProvider>(context, listen: true).isDarkMode,
-              onChanged: (value) {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .toggleTheme();
-              },
-            ),
-          ],
+          actions: const [SettingPage()],
         ),
         body: const Search());
   }
